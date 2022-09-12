@@ -1,18 +1,24 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { string } from 'prop-types';
+import { View, StyleSheet } from 'react-native';
+import { string, shape } from 'prop-types';
+import { Feather } from '@expo/vector-icons';
 
 export default function CirecleButton(props) {
-  const { children } = props;
+  const { style, name } = props;
   return (
-    <View style={styles.circleBottom}>
-      <Text style={styles.circleBottomLabel}>{children}</Text>
+    <View style={[styles.circleBottom, style]}>
+      <Feather name={name} size={32} color="white" />
     </View>
   );
 }
 
 CirecleButton.propTypes = {
-  children: string.isRequired,
+  style: shape(),
+  name: string.isRequired,
+};
+
+CirecleButton.defaultProps = {
+  style: null,
 };
 
 const styles = StyleSheet.create({

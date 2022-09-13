@@ -8,11 +8,11 @@ import SignUpScreen from './src/screens/SignUpScreen';
 
 export default function App() {
   return (
-    <SignUpScreen />
+    // <SignUpScreen />
     // <LoginScreen />
     // <MemoCreateSxcreen />
     // <MemoEditScreen />
-    // <MemoListScreen />
+    <MemoListScreen />
     // <MemoDetailScreen />
   );
 }

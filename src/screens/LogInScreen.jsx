@@ -1,22 +1,54 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View, Text, StyleSheet, TextInput, TouchableOpacity,
 } from 'react-native';
-import AppBar from '../components/AppBar';
 import Button from '../components/Button';
 
-export default function LoginScreen() {
+export default function LoginScreen(props) {
+  const { navigation } = props;
+  const [email, setEmail] = useState('');
+  const [password, setpassword] = useState('');
   return (
     <View style={styles.container}>
-      <AppBar />
       <View style={styles.inner}>
         <Text style={styles.title}>Log In</Text>
-        <TextInput value="Email Adress" style={styles.input} />
-        <TextInput value="Password" style={styles.input} />
-        <Button label="submit" />
+        <TextInput
+          value={email}
+          style={styles.input} 
+          onChangeText={(text) => {setEmail(text)}}
+          autoCapitalize='none'
+          keyboardType='email-address'
+          placeholder='Email Address'
+          textContentType='emailAddress'
+        />
+        <TextInput
+          value={password}
+          style={styles.input} 
+          onChangeText={(text) => {setpassword(text)}}
+          autoCapitalize='none'
+          placeholder='Password'
+          secureTextEntry
+          textContentType='password'
+        />
+        <Button
+          label="Submit"
+          onPress={() => {
+            navigation.reset({
+              index: 0,
+              routes: [{ name: 'MemoList' }],
+            })
+          }}
+        />
         <View style={styles.footer}>
           <Text style={styles.footerText}>Not resistered?</Text>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => { 
+                navigation.reset({
+                index: 0,
+                routes: [{name: 'SignUp'}],
+                })
+            }}
+          >
             <Text style={styles.footerLink}>Sign up here!</Text>
           </TouchableOpacity>
         </View>

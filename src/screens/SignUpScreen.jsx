@@ -3,6 +3,45 @@ import {
   View, Text, StyleSheet, TextInput, TouchableOpacity,
 } from 'react-native';
 import Button from '../components/Button';
+import { initializeApp } from "firebase/app";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDxm3o8OLAJaBDe3Jwk4iCMqPxbvTFafNw",
+  authDomain: "memoapp2-c1ce0.firebaseapp.com",
+  projectId: "memoapp2-c1ce0",
+  storageBucket: "memoapp2-c1ce0.appspot.com",
+  messagingSenderId: "511881521575",
+  appId: "1:511881521575:web:889383cef8b196c043ae82",
+};
+
+const app = initializeApp(firebaseConfig);
+
+// const auth = getAuth(app);
+
+
+const auth = getAuth();
+const testFunc = (auth, email, password) => {
+  createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      // Signed in
+      const user = userCredential.user;
+      console.log("成功")
+      console.log(user)
+      // ...
+    })
+    .catch((error) => {
+      console.log("失敗")
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(errorMessage)
+      // ..
+    });
+}
+console.log("関数実行開始")
+testFunc(auth, "test20@test.com", "password1234")
+console.log("関数実行終了")
+
 
 export default function SignUpScreen(props) {
   const { navigation } = props;
@@ -43,6 +82,7 @@ export default function SignUpScreen(props) {
           <Text style={styles.footerText}>Already registered?</Text>
           <TouchableOpacity
             onPress={() => { 
+              testFunc(auth, "test20@test.com", "password1234")
               navigation.reset({
                 index: 0,
                 routes: [{name: 'LogIn'}],
